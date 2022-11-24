@@ -22,4 +22,26 @@ public class UserInteraction {
         }
         return providedId;
     }
+    public static boolean askUserForDecision() {
+        System.out.println("\nJeśli chcesz zapisać dane do pliku PDF, wciśnij 'y'.");
+
+        Scanner console = new Scanner(System.in);
+
+        String userInput = console.nextLine().toString();
+
+        if (userInput.equals("y")){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public static String askUserForFileName() {
+        System.out.println("Podaj nazwę pliku PDF, do którego chcesz zapisać dane.");
+        Scanner console = new Scanner(System.in);
+
+        String userInput = console.nextLine().toString();
+
+        return userInput;
+    }
 }

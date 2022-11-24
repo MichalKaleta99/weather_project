@@ -35,14 +35,16 @@ public class Stations {
                             System.out.println("Ulica - " + station.get("addressStreet").toString().replaceAll("\"", ""));
                             idx[0]++;
                         });
+        System.out.println("\nU góry wyświetlono listę wszystkich stacji. Podaj ID stacji, dla której chcesz wyświetlić szczegółowe dane: ");
+
     }
 
-    public static void displaySingleStationInfo(JsonNode station) throws JsonProcessingException {
+    public static void displaySingleStationInfo(JsonNode station, int providedId) throws JsonProcessingException {
+        System.out.println("Szczegółowe informacje dla stacji o numerze ID "+providedId + ": ");
 
         System.out.println("Wartość indeksu dla stacji (wartość  najgorszego z indeksów cząstkowych zanieczyszczeń) - " + station.get("stIndexLevel").get("indexLevelName").toString().replaceAll("\"", "") + " (" + station.get("stIndexLevel").get("id").toString().replaceAll("\"", "") + ")");
         System.out.println("Data danych źródłowych, z których policzono wartość indeksu - " + station.get("stSourceDataDate").toString().replaceAll("\"", ""));
         displayAirInfo(station);
-
     }
     public static void displayAirInfo(JsonNode station){
         displaySo2Info(station);

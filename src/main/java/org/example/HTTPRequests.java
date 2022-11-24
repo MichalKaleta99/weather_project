@@ -12,10 +12,11 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 
 public class HTTPRequests {
+    String url;
 
     static CloseableHttpClient httpclient = HttpClients.createDefault();
 
-    public static String getRequest(String url){
+    public String getRequest(String url){
         String result="null";
         HttpGet request = new HttpGet(url);
         try (CloseableHttpResponse response = httpclient.execute(request)) {
@@ -32,4 +33,12 @@ public class HTTPRequests {
         return result;
     }
 
+    public String getAllStationsRequest(){
+        String getAllStationsRequest = getRequest("https://api.gios.gov.pl/pjp-api/rest/station/findAll");
+        return getAllStationsRequest;
+    }
+
+    public HTTPRequests(String url) {
+        this.url = url;
+    }
 }

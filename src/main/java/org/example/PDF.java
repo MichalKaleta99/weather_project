@@ -13,7 +13,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.stream.Stream;
 
-public class PDFTable {
+import static org.example.UserInteraction.askUserForFileName;
+
+public class PDF {
+    static String pdfName = askUserForFileName();
     static SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
     static Date date = new Date(System.currentTimeMillis());
 
@@ -32,13 +35,12 @@ public class PDFTable {
     public static void createPdf(JsonNode station, int id) throws DocumentException, IOException, URISyntaxException {
 
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream("Measurements_results.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream(pdfName+".pdf"));
 
         document.open();
         addMetaData(document, id);
 
         Font f = new Font();
-
 
         f.setStyle(Font.BOLD);
         f.setSize(32);
@@ -64,6 +66,8 @@ public class PDFTable {
         table.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
 
         addInfoToCells(table, stationInfo);
+
+        System.out.println("Pomyślnie zapisano do pliku PDF o nazwie "+pdfName+".pdf. Plik znajduje się w katalogu z projektem.");
     }
 
     public static void addInfoToCells(PdfPTable table, JsonNode stationInfo){
